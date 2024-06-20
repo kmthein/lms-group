@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Author {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "author_id")
     private int id;
     @Column(name = "author_name")
@@ -30,9 +30,9 @@ public class Author {
     }
 
     //    @OneToMany
-//    @JoinColumn(name = "author_id")
-//    private List<Book> books = new ArrayList<>();
-//    @JsonBackReference
-//    @OneToMany(mappedBy = "author")
-//    private List<Book> books;
+    //    @JoinColumn(name = "author_id")
+    //    private List<Book> books = new ArrayList<>();
+    //    @JsonBackReference
+    //    @OneToMany(mappedBy = "author")
+    //    private List<Book> books;
 }

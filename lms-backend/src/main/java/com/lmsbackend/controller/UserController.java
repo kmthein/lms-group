@@ -42,9 +42,8 @@ public class UserController {
         } else if (userRole.equals(Role.LIBRARIAN)) {
             Librarian librarian1 = new Librarian(currentDate, userData);
             librarianDAO.save(librarian1);
-            return ResponseEntity.ok("Librarin Created Successfully");
+            return ResponseEntity.ok("Librarian Created Successfully");
         }
-//        userRole.equals(Role.LIBRARIAN) ? memberDAO.save() : "";
         return ResponseEntity.ok("User Created Successfully");
     }
 
