@@ -10,29 +10,33 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/reservation")
 public class ReservationController {
     @Autowired
     private ReservationDAO reservationDAO;
 
-    @GetMapping("/reservation")
+    @GetMapping("all")
     public List<Reservation> getReservation() {
         return reservationDAO.findall();
     }
 
-    @PostMapping("/creatreservation")
+    @GetMapping("{id}")
+    public Reservation getReservation(@PathVariable int id) {
+        return reservationDAO.getReservationById(id);
+    }
+    @PostMapping("create")
     private ResponseEntity<String> addReservation(@RequestBody Reservation reservation){
         reservationDAO.saveReservation(reservation);
         return ResponseEntity.ok("Added successful");
     }
-    @PostMapping("updatreservation/{id}")
+    @PostMapping("update/{id}")
     public ResponseEntity<String> updateReservation(@PathVariable int id, @RequestBody Reservation reservation){
         reservationDAO.updateReservation(reservation);
         return ResponseEntity.ok("Updated successful");
 
 
     }
-    @GetMapping("deletereservation/{id}")
+    @GetMapping("delete/{id}")
     public ResponseEntity<String> deleteReservation(@PathVariable int id){
         reservationDAO.deleteReservation(id);
         return ResponseEntity.ok("Delete Successful");

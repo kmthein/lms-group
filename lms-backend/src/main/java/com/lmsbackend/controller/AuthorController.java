@@ -18,9 +18,13 @@ public class AuthorController {
         return authorDAO.findall();
     }
 
+    @GetMapping("{id}")
+    public Author getAuthorById(@PathVariable int id){
+        return authorDAO.getAuthor(id);
+    }
+
     @PostMapping("/create")
     private ResponseEntity<String> addAuthor(@RequestBody Author author){
-        System.out.println(author);
         authorDAO.saveAuthor(author);
         return ResponseEntity.ok("Added successful");
     }

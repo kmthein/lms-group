@@ -1,9 +1,7 @@
 package com.lmsbackend.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,17 +13,32 @@ import java.time.LocalTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "fine")
 public class Fine {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int fine_id;
+    @Column(name = "fine_id")
+    private int fineId;
 
+    @Column(name = "amount")
     private int amount;
-    private LocalDate fine_date;
-    private String payment_status;
-    private int rent_id;
-    private int member_id;
+
+    @Column(name = "fine_date")
+    private LocalDate fineDate;
+
+    @Column(name = "payment_status")
+    private String paymentStatus;
+
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name = "rent_id")
+    Bookrent bookrent;
+
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    Member member;
 
 
 }
