@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/publisher")
 public class PublisherController {
     PublisherDAO publisherDAO;
 
@@ -18,29 +18,29 @@ public class PublisherController {
         this.publisherDAO = publisherDAO;
     }
 
-    @GetMapping("publisher")
+    @GetMapping("all")
     public List<Publisher> getPublisher() {
         return publisherDAO.getPublisher();
     }
 
-    @GetMapping("publisher/{id}")
+    @GetMapping("{id}")
     public Publisher getPublisherById(@PathVariable int id) {
         return publisherDAO.getPublisherById(id);
     }
 
-    @PostMapping("publisher")
+    @PostMapping("create")
     public ResponseEntity<String> addPublisher(@RequestBody Publisher publisher) {
         publisherDAO.save(publisher);
         return ResponseEntity.ok("Publisher updated successfully");
     }
 
-    @PutMapping("publisher/{id}")
+    @PostMapping("update/{id}")
     public ResponseEntity<String> updatePublisher(@PathVariable int id, @RequestBody Publisher publisher) {
         publisherDAO.updatePublisher(publisher);
         return ResponseEntity.ok("Publisher updated successfully");
     }
 
-    @DeleteMapping("publisher/{id}")
+    @GetMapping("delete/{id}")
     public ResponseEntity<String> deletePublisher(@PathVariable int id) {
         publisherDAO.deletePublisher(id);
         return ResponseEntity.ok("Publisher deleted successfully");

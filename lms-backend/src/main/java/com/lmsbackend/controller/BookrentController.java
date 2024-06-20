@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/rent")
 public class BookrentController {
     private BookerentDAO bookerentDAO;
     @Autowired
@@ -17,27 +17,27 @@ public class BookrentController {
         this.bookerentDAO = bookerentDAO;
     }
 
-    @GetMapping("bookrent")
+    @GetMapping("all")
     public List<Bookrent> getBookrent() {
         return bookerentDAO.getBookrent();
     }
-    @GetMapping("bookrent/{id}")
+    @GetMapping("{id}")
     public Bookrent getBookrentById(@PathVariable int id) {
         return bookerentDAO.getBookrent(id);
     }
-    @PostMapping("bookrent")
+    @PostMapping("create")
     public ResponseEntity<String> addBookrent(@RequestBody Bookrent bookrent) {
         bookerentDAO.save(bookrent);
         return ResponseEntity.ok("Bookrent added successfully");
     }
 
-    @PutMapping("bookrent/{id}")
+    @PostMapping("update/{id}")
     public ResponseEntity<String> updateBookrent(@PathVariable int id, @RequestBody Bookrent bookrent) {
         bookerentDAO.updateBookrent(bookrent);
         return ResponseEntity.ok("Bookrent updated successfully");
     }
 
-    @DeleteMapping("bookren/{id}")
+    @GetMapping("delete/{id}")
     public ResponseEntity<String> deleteBookrent(@PathVariable int id) {
         bookerentDAO.deleteBookrent(id);
         return ResponseEntity.ok("Bookrent deleted successfully");
