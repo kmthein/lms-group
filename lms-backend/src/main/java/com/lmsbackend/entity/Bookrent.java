@@ -38,4 +38,12 @@ public class Bookrent {
 
     @Column(name = "librarian_id")
     private int librarianId;
+
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    @ManyToOne
+    @JoinColumn(name = "librarian_id")
+    Librarian librarian;
 }

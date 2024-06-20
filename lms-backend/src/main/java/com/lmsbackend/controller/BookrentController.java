@@ -31,13 +31,13 @@ public class BookrentController {
         return ResponseEntity.ok("Bookrent added successfully");
     }
 
-    @PutMapping("bookrent")
-    public ResponseEntity<String> updateBookrent(@RequestBody Bookrent bookrent) {
+    @PutMapping("bookrent/{id}")
+    public ResponseEntity<String> updateBookrent(@PathVariable int id, @RequestBody Bookrent bookrent) {
         bookerentDAO.updateBookrent(bookrent);
         return ResponseEntity.ok("Bookrent updated successfully");
     }
 
-    @DeleteMapping("bookren")
+    @DeleteMapping("bookren/{id}")
     public ResponseEntity<String> deleteBookrent(@PathVariable int id) {
         bookerentDAO.deleteBookrent(id);
         return ResponseEntity.ok("Bookrent deleted successfully");

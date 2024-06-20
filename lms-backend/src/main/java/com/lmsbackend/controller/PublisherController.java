@@ -34,8 +34,8 @@ public class PublisherController {
         return ResponseEntity.ok("Publisher updated successfully");
     }
 
-    @PutMapping("publisher")
-    public ResponseEntity<String> updatePublisher(@RequestBody Publisher publisher) {
+    @PutMapping("publisher/{id}")
+    public ResponseEntity<String> updatePublisher(@PathVariable int id, @RequestBody Publisher publisher) {
         publisherDAO.updatePublisher(publisher);
         return ResponseEntity.ok("Publisher updated successfully");
     }
