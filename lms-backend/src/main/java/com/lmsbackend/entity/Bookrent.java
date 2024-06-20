@@ -1,5 +1,6 @@
 package com.lmsbackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,11 +40,18 @@ public class Bookrent {
     @Column(name = "librarian_id")
     private int librarianId;
 
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
 
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "librarian_id")
     Librarian librarian;
+
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    Book book;
 }
