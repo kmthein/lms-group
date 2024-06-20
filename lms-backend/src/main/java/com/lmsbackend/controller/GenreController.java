@@ -3,6 +3,7 @@ package com.lmsbackend.controller;
 
 import com.lmsbackend.dao.GenreDAO;
 
+import com.lmsbackend.dto.GenreBookCountDTO;
 import com.lmsbackend.entity.Genre;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,26 +11,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:5173/")
 @RestController
-@RequestMapping
+@RequestMapping("api/genre")
 public class GenreController {
 
     @Autowired
     private GenreDAO genreDAO;
 
-    @GetMapping("/genre")
+    @GetMapping("all")
     public List<Genre> getById(){
         return genreDAO.findAll();
     }
 
-    @PostMapping("/genre")
+    @PostMapping("create")
     public ResponseEntity<String> createGenre(@RequestBody Genre genre) {
         genreDAO.saveGenre(genre);
         return ResponseEntity.ok("Saved Genre");
     }
 
-    @GetMapping("/genre/{id}")
+    @GetMapping("{id}")
     public Genre findById(@PathVariable int id) {
         return genreDAO.findById(id);
     }
@@ -40,7 +41,7 @@ public class GenreController {
         return ResponseEntity.ok("Updated Genre");
     }
 
-    @PostMapping("/genre/{id}")
+    @PostMapping("/delete/{id}")
     public ResponseEntity<String> deleteGenre(@PathVariable int id) {
         genreDAO.deleteGenre(id);
         return ResponseEntity.ok("Deleted Genre");

@@ -28,6 +28,11 @@ public class AuthorController {
         return authorDAO.findall();
     }
 
+    @GetMapping("{id}")
+    public Author getAuthorById(@PathVariable int id){
+        return authorDAO.getAuthor(id);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<String> addAuthor(@ModelAttribute Author author, @RequestParam("files") MultipartFile[] files) {
         System.out.println("Received request to add author");

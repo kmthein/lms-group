@@ -21,6 +21,11 @@ public class AuthorDAOImpl implements AuthorDAO {
     }
 
     @Override
+    public Author getAuthor(int id) {
+        return em.find(Author.class, id);
+    }
+
+    @Override
     public List<Author> findall() {
         TypedQuery<Author> query = em.createQuery("From Author",Author.class);
         return query.getResultList();

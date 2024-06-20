@@ -20,6 +20,16 @@ public class ReservationDAOImpl implements ReservationDAO{
     }
 
     @Override
+    public Reservation getReservationById(int id) {
+        return em.find(Reservation.class, id);
+    }
+
+    @Override
+    public Reservation getReservation(int id) {
+        return em.find(Reservation.class, id);
+    }
+
+    @Override
     public List<Reservation> findall() {
         TypedQuery<Reservation> query = em.createQuery("From Reservation", Reservation.class);
         return query.getResultList();

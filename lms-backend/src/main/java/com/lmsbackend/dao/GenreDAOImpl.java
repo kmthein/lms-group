@@ -1,6 +1,8 @@
 package com.lmsbackend.dao;
 
 
+import com.lmsbackend.dto.GenreBookCountDTO;
+import com.lmsbackend.dto.PublisherBookCountDTO;
 import com.lmsbackend.entity.Genre;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -45,4 +47,6 @@ public class GenreDAOImpl implements GenreDAO {
         Genre theGenre = em.find(Genre.class, id);
         em.remove(theGenre);
     }
+
+
 }

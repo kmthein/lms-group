@@ -1,5 +1,6 @@
 package com.lmsbackend.dao;
 
+import com.lmsbackend.dto.GenreBookCountDTO;
 import com.lmsbackend.entity.Genre;
 
 import java.util.List;
@@ -10,7 +11,6 @@ public interface GenreDAO {
     Genre findById(int id);
 
     List<Genre> findAll();
-
    void updateGenre(Genre genre);
 
    void deleteGenre(int id);

@@ -21,7 +21,7 @@ public class BookController {
 
     @PostMapping("/create")
     @Transactional
-    public ResponseEntity<String> createBook(@RequestBody Book book) {
+    public ResponseEntity<String> createBook(@ModelAttribute Book book) {
         bookDAO.saveBook(book);
         return ResponseEntity.ok("Book inserted successfully!");
     }

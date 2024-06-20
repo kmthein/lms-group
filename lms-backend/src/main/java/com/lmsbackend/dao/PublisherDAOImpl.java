@@ -1,13 +1,11 @@
 package com.lmsbackend.dao;
 
+import com.lmsbackend.dto.PublisherBookCountDTO;
 import com.lmsbackend.entity.Publisher;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -54,5 +52,13 @@ public class PublisherDAOImpl implements PublisherDAO {
 
     }
 
+    @Override
+    public List<PublisherBookCountDTO> getPublisherAndBookTotal() {
+        String jpql = "SELECT new com.lmsbackend.dto.PublisherBookCountDTO(p.publisherName, COUNT(b)) " +
+                "FROM Book b JOIN b.publisher p " +
+                "GROUP BY p.publisherName";
+        TypedQuery<PublisherBookCountDTO> query = em.createQuery(jpql, PublisherBookCountDTO.class);
+        return query.getResultList();
+    }
 
 }
