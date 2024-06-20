@@ -1,6 +1,7 @@
 package com.lmsbackend.controller;
 
 import com.lmsbackend.dao.BookDAO;
+import com.lmsbackend.dto.BookDTO;
 import com.lmsbackend.entity.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +22,13 @@ public class BookController {
 
     @PostMapping("/create")
     @Transactional
-    public ResponseEntity<String> createBook(@ModelAttribute Book book) {
-        bookDAO.saveBook(book);
+    public ResponseEntity<String> createBook(@RequestBody BookDTO bookDTO) {
+        Book book = new Book();
+        book.setTitle(bookDTO.getTitle());
+        book.setPublishYear(bookDTO.getPublishYear());
+        book.setBookImg(bookDTO.getBookImg());
+        book.setStock(bookDTO.getStock());
+        bookDAO.saveBook(book, bookDTO.getAuthorId(), bookDTO.getPublisherId(), bookDTO.getGenreIds());
         return ResponseEntity.ok("Book inserted successfully!");
     }
 

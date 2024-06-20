@@ -49,7 +49,7 @@ public class PublisherController {
     }
 
     @GetMapping("publishersandbooks")
-    public List<PublisherBookCountDTO>getPublishersandBooks() {
+    public List<PublisherBookCountDTO> getPublishersandBooks() {
         return publisherDAO.getPublisherAndBookTotal();
     }
 }

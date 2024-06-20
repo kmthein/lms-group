@@ -1,4 +1,6 @@
 package com.lmsbackend.dao;
+import com.lmsbackend.dto.AuthorBookCountDTO;
+import com.lmsbackend.dto.PublisherBookCountDTO;
 import com.lmsbackend.entity.Author;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -43,5 +45,12 @@ public class AuthorDAOImpl implements AuthorDAO {
     public void deleteAuthor(int id) {
             Author author = em.find(Author.class,id);
             em.remove(author);
+    }
+    @Override
+    public List<AuthorBookCountDTO> getAuthorAndBookTotal() {
+        String jpql = "SELECT new com.lmsbackend.dto.AuthorBookCountDTO(a.id, a.name, a.authorImg, COUNT(b.id)) " +
+                "FROM Author a LEFT JOIN Book b ON a.id = b.author.id GROUP BY a.id, a.name";
+        TypedQuery<AuthorBookCountDTO> query = em.createQuery(jpql, AuthorBookCountDTO.class);
+        return query.getResultList();
     }
 }

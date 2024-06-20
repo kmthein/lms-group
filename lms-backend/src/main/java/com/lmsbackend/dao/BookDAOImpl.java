@@ -1,6 +1,10 @@
 package com.lmsbackend.dao;
 
+import com.lmsbackend.entity.Author;
 import com.lmsbackend.entity.Book;
+import com.lmsbackend.entity.Genre;
+import com.lmsbackend.entity.Publisher;
+import com.lmsbackend.exception.ResourceNotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +25,22 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     @Transactional
-    public void saveBook(Book book) {
+    public void saveBook(Book book, int authorId, int publisherId, List<Integer> genreIds) {
+        Author author = entityManager.find(Author.class, authorId);
+        if (author == null) {
+            throw new ResourceNotFoundException("Author id "+ authorId +" is not existed.");
+        }
+        Publisher publisher = entityManager.find(Publisher.class, publisherId);
+        if (publisher == null) {
+            throw new ResourceNotFoundException("Publisher id "+ publisherId +" is not existed.");
+        }
+        List<Genre> genres = entityManager.createQuery("SELECT g FROM Genre g WHERE g.genreId IN :ids", Genre.class).setParameter("ids", genreIds).getResultList();
+        if (genres.size() != genreIds.size()) {
+            throw new ResourceNotFoundException("Genre id not existed.");
+        }
+        book.setAuthor(author);
+        book.setPublisher(publisher);
+        book.setGenres(genres);
         entityManager.persist(book);
     }
 

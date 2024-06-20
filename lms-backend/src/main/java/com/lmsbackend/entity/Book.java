@@ -43,11 +43,12 @@ public class Book {
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
 
-//    @ManyToMany
-//    @JoinTable(
-//            name = "book_genre",
-//            joinColumns = @JoinColumn(name = "genre_id"),
-//            inverseJoinColumns = @JoinColumn(name = "book_id")
-//    )
-//    private List<Genre> genre;
+    @ManyToMany
+    @JoinTable(
+            name = "book_genre",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
+    )
+    @JsonIgnoreProperties("books")
+    private List<Genre> genres;
 }

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface BookDAO {
     //to save book
-    public void saveBook(Book book);
+    public void saveBook(Book book, int authorId, int publisherId, List<Integer> genreId);
 
     //to read data in Book
     Book findBookById(int id);
