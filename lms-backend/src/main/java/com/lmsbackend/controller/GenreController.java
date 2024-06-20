@@ -3,6 +3,7 @@ package com.lmsbackend.controller;
 
 import com.lmsbackend.dao.GenreDAO;
 
+import com.lmsbackend.dto.GenreBookCountDTO;
 import com.lmsbackend.entity.Genre;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

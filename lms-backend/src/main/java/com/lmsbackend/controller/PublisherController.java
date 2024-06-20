@@ -1,6 +1,7 @@
 package com.lmsbackend.controller;
 
 import com.lmsbackend.dao.PublisherDAO;
+import com.lmsbackend.dto.PublisherBookCountDTO;
 import com.lmsbackend.entity.Publisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -45,5 +46,10 @@ public class PublisherController {
     public ResponseEntity<String> deletePublisher(@PathVariable int id) {
         publisherDAO.deletePublisher(id);
         return ResponseEntity.ok("Publisher deleted successfully");
+    }
+
+    @GetMapping("publishersandbooks")
+    public List<PublisherBookCountDTO>getPublishersandBooks() {
+        return publisherDAO.getPublisherAndBookTotal();
     }
 }

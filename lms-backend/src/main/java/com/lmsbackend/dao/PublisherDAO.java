@@ -1,5 +1,6 @@
 package com.lmsbackend.dao;
 
+import com.lmsbackend.dto.PublisherBookCountDTO;
 import com.lmsbackend.entity.Publisher;
 import org.springframework.http.ResponseEntity;
 
@@ -15,4 +16,6 @@ public interface PublisherDAO {
     public void updatePublisher(Publisher publisher);
 
     public void deletePublisher(int id);
+
+    public List<PublisherBookCountDTO> getPublisherAndBookTotal();
 }

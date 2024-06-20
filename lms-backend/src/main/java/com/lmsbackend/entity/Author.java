@@ -22,11 +22,15 @@ public class Author {
     @Column(name = "author_name")
     private String name;
     @Column(name = "author_img")
-    private String authorimg;
+    private String authorImg;
 
-    public Author(String name, String authorimg) {
+    @JsonBackReference
+    @OneToMany(mappedBy = "author")
+    private List<Book> books = new ArrayList<>();
+
+    public Author(String name, String authorImg) {
         this.name = name;
-        this.authorimg = authorimg;
+        this.authorImg = authorImg;
     }
 
     //    @OneToMany
