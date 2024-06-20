@@ -31,15 +31,6 @@ public class Bookrent {
     @Column(name = "return_date")
     private LocalDate returnDate;
 
-    @Column(name = "book_id")
-    private int bookId;
-
-    @Column(name = "member_id")
-    private int memberId;
-
-    @Column(name = "librarian_id")
-    private int librarianId;
-
     @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "member_id")
