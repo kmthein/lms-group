@@ -1,5 +1,7 @@
 package com.lmsbackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -14,18 +16,21 @@ public class BookReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="review_id")
-    private int review_id;
+    private int id;
 
-    @Column(name="user_id")
-    private int user_id;
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
 
-    @Column(name="book_id")
-    private int book_id;
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Column(name="description")
     private String description;
 
     @Column(name="review_date")
-    private LocalDate review_date;
-
+    private LocalDate reviewDate;
 }

@@ -19,19 +19,19 @@ public class BookController {
         this.bookDAO = bookDAO;
     }
 
-    @PostMapping("/create-book")
+    @PostMapping("/create")
     @Transactional
-    public String createBook(@RequestBody Book book) {
+    public ResponseEntity<String> createBook(@RequestBody Book book) {
         bookDAO.saveBook(book);
-        return "Insert Successfully! ";
+        return ResponseEntity.ok("Book inserted successfully!");
     }
 
-    @GetMapping("/allbooks")
+    @GetMapping("/all")
     public List<Book> getAllBooks() {
         return bookDAO.findAllBooks();
     }
 
-    @GetMapping("/bookByid/{id}")
+    @GetMapping("/{id}")
     public Book getBookById(@PathVariable int id) {
         return bookDAO.findBookById(id);
     }

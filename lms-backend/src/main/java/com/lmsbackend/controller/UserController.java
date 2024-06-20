@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
@@ -45,5 +46,10 @@ public class UserController {
         }
 //        userRole.equals(Role.LIBRARIAN) ? memberDAO.save() : "";
         return ResponseEntity.ok("User Created Successfully");
+    }
+
+    @PostMapping("/all")
+    public List<User> getAllUsers() {
+        return userDAO.findAll();
     }
 }

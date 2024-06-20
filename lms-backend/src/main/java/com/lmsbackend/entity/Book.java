@@ -1,5 +1,6 @@
 package com.lmsbackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,29 +11,32 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="book")
-
 public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="book_id")
-    private int book_id;
+    private int id;
 
     @Column(name="title")
-    private String book_name;
+    private String title;
 
     @Column(name="publish_year")
-    private int publish_year;
+    private int publishYear;
 
     @Column(name="book_img")
-    private String book_img;
+    private String bookImg;
 
     @Column(name="stock")
     private int stock;
 
-    @Column(name="author_id")
-    private int author_id;
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private Author author;
 
-    @Column(name="publisher_id")
-    private int publisher_id;
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name = "publisher_id")
+    private Publisher publisher;
 }

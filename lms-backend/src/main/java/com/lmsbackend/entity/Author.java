@@ -1,11 +1,11 @@
 package com.lmsbackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +24,15 @@ public class Author {
     @Column(name = "author_img")
     private String authorimg;
 
-    @OneToMany
-    @JoinColumn(name = "author_id")
-    private List<Book> books = new ArrayList<>();
+    public Author(String name, String authorimg) {
+        this.name = name;
+        this.authorimg = authorimg;
+    }
+
+    //    @OneToMany
+//    @JoinColumn(name = "author_id")
+//    private List<Book> books = new ArrayList<>();
+//    @JsonBackReference
+//    @OneToMany(mappedBy = "author")
+//    private List<Book> books;
 }
