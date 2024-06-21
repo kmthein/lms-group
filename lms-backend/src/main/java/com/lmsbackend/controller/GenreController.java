@@ -46,4 +46,9 @@ public class GenreController {
         genreDAO.deleteGenre(id);
         return ResponseEntity.ok("Deleted Genre");
     }
+
+    @GetMapping("genreandbookcount")
+    public List<GenreBookCountDTO> getGenreBookCount() {
+        return genreDAO.getGenreBookCountDTO();
+    }
 }

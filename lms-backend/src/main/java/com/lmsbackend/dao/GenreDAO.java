@@ -14,6 +14,6 @@ public interface GenreDAO {
    void updateGenre(Genre genre);
 
    void deleteGenre(int id);
-
+   List<GenreBookCountDTO> getGenreBookCountDTO();
 
 }

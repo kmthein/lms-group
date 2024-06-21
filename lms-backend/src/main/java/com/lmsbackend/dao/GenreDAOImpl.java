@@ -48,5 +48,14 @@ public class GenreDAOImpl implements GenreDAO {
         em.remove(theGenre);
     }
 
+    @Override
+    public List<GenreBookCountDTO> getGenreBookCountDTO() {
+        TypedQuery<GenreBookCountDTO> query = em.createQuery("SELECT new com.lmsbackend.dto.GenreBookCountDTO(g.genreName, COUNT(b.id)) " +
+                        "FROM Book b right join b.genres g " +
+                        "GROUP BY g.genreName",
+                GenreBookCountDTO.class);
+        return query. getResultList();
+    }
+
 
 }
