@@ -18,7 +18,7 @@ public interface BookDAO {
     List<Book> findBookByLastName(String lastName);
 
     //update data
-    void updateBook(Book book);
+    void updateBook(Book book, int authorId, int publisherId, List<Integer> genreIds);
 
     //delete
     void deleteBook(Integer id);

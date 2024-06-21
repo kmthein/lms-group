@@ -32,27 +32,29 @@ public class BookController {
 
     @PostMapping("/create")
     @Transactional
-    public ResponseEntity<String> createBook(@ModelAttribute BookDTO bookDTO, @RequestParam("files") MultipartFile[] files) {
-        System.out.println(bookDTO);
-        System.out.println(files);
+    public ResponseEntity<String> createBook(@ModelAttribute BookDTO bookDTO, @RequestParam(value = "files", required = false) MultipartFile[] files) {
         Book book = new Book();
         book.setTitle(bookDTO.getTitle());
         book.setPublishYear(bookDTO.getPublishYear());
         book.setStock(bookDTO.getStock());
-        for (MultipartFile file : files) {
-            if (!file.isEmpty()) {
-                try {
-                    String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
-                    Files.createDirectories(Paths.get(UPLOAD_DIR));
-                    file.transferTo(new File(UPLOAD_DIR + "/" + fileName));
-                    book.setBookImg("/external-images/" + fileName);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("File upload failed");
+        if (files != null && files.length > 0) {
+            for (MultipartFile file : files) {
+                if (!file.isEmpty()) {
+                    try {
+                        String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+                        Files.createDirectories(Paths.get(UPLOAD_DIR));
+                        file.transferTo(new File(UPLOAD_DIR + "/" + fileName));
+                        book.setBookImg("/external-images/" + fileName);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("File upload failed");
+                    }
+                } else {
+                    System.out.println("Empty file received: " + file.getName());
                 }
-            } else {
-                System.out.println("Empty file received: " + file.getName());
             }
+        } else {
+            book.setBookImg("");
         }
         bookDAO.saveBook(book, bookDTO.getAuthorId(), bookDTO.getPublisherId(), bookDTO.getGenreIds());
         return ResponseEntity.ok("Book inserted successfully!");
@@ -68,14 +70,41 @@ public class BookController {
         return bookDAO.findBookById(id);
     }
 
-    @PostMapping("/update-book/{id}")
+    @PostMapping("/update")
     @Transactional
-    public ResponseEntity<String> updateBook(@PathVariable int id, @RequestBody Book book) {
-        bookDAO.updateBook(book);
+    public ResponseEntity<String> updateBook(@ModelAttribute BookDTO bookDTO, @RequestParam(value = "files", required = false) MultipartFile[] files, @RequestParam(value = "id") int id) {
+        Book book = new Book();
+        book.setId(id);
+        book.setTitle(bookDTO.getTitle());
+        book.setPublishYear(bookDTO.getPublishYear());
+        book.setStock(bookDTO.getStock());
+        if (files != null && files.length > 0) {
+            for (MultipartFile file : files) {
+                if (!file.isEmpty()) {
+                    try {
+                        String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+                        Files.createDirectories(Paths.get(UPLOAD_DIR));
+                        file.transferTo(new File(UPLOAD_DIR + "/" + fileName));
+                        book.setBookImg("/external-images/" + fileName);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("File upload failed");
+                    }
+                } else {
+                    System.out.println("Empty file received: " + file.getName());
+                }
+            }
+        } else {
+            book.setBookImg(bookDTO.getBookImg());
+        }
+        System.out.println(id);
+        System.out.println(bookDTO.getBookImg());
+        System.out.println(bookDTO.getTitle());
+        bookDAO.updateBook(book, bookDTO.getAuthorId(), bookDTO.getPublisherId(), bookDTO.getGenreIds());
         return ResponseEntity.ok("Updated Successfully! ");
     }
 
-    @GetMapping("/delete-book/{id}")
+    @GetMapping("/delete/{id}")
     @Transactional
     public String deleteBook(@PathVariable int id) {
         bookDAO.deleteBook(id);
