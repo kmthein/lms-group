@@ -2,9 +2,9 @@ package com.lmsbackend.dto;
 
 public class GenreBookCountDTO {
     private String genre;
-    private int bookCount;
+    private Long bookCount;
 
-    public GenreBookCountDTO(String genre, int bookCount) {
+    public GenreBookCountDTO(String genre, Long bookCount) {
         this.genre = genre;
         this.bookCount = bookCount;
     }
@@ -17,11 +17,11 @@ public class GenreBookCountDTO {
         this.genre = genre;
     }
 
-    public int getBookCount() {
+    public Long getBookCount() {
         return bookCount;
     }
 
-    public void setBookCount(int bookCount) {
+    public void setBookCount(Long bookCount) {
         this.bookCount = bookCount;
     }
 }

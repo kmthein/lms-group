@@ -55,7 +55,7 @@ public class PublisherDAOImpl implements PublisherDAO {
     @Override
     public List<PublisherBookCountDTO> getPublisherAndBookTotal() {
         String jpql = "SELECT new com.lmsbackend.dto.PublisherBookCountDTO(p.publisherName, COUNT(b)) " +
-                "FROM Book b JOIN b.publisher p " +
+                "FROM Book b right join b.publisher p " +
                 "GROUP BY p.publisherName";
         TypedQuery<PublisherBookCountDTO> query = em.createQuery(jpql, PublisherBookCountDTO.class);
         return query.getResultList();
