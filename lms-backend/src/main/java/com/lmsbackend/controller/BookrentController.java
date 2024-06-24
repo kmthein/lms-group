@@ -1,11 +1,13 @@
 package com.lmsbackend.controller;
 
 import com.lmsbackend.dao.BookerentDAO;
+import com.lmsbackend.dto.RentDTO;
 import com.lmsbackend.entity.Bookrent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -26,8 +28,12 @@ public class BookrentController {
         return bookerentDAO.getBookrent(id);
     }
     @PostMapping("create")
-    public ResponseEntity<String> addBookrent(@RequestBody Bookrent bookrent) {
-        bookerentDAO.save(bookrent);
+    public ResponseEntity<String> addBookrent(@RequestBody RentDTO rent) {
+        Bookrent bookrent = new Bookrent();
+        bookrent.setRentDate(LocalDate.now());
+        bookrent.setDueDate(rent.getDueDate());
+        bookrent.setStatus("pending");
+        bookerentDAO.save(bookrent,rent.getMemberId(),rent.getBookId());
         return ResponseEntity.ok("Bookrent added successfully");
     }
 

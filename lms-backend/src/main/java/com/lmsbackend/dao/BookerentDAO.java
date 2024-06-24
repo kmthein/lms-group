@@ -5,7 +5,7 @@ import com.lmsbackend.entity.Bookrent;
 import java.util.List;
 
 public interface BookerentDAO {
-    public void save(Bookrent book);
+    public void save(Bookrent book,int memberId,int bookId);
 
     public List<Bookrent> getBookrent();
 
