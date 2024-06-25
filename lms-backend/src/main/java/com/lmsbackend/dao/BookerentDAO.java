@@ -1,5 +1,6 @@
 package com.lmsbackend.dao;
 
+import com.lmsbackend.dto.ShowDataDTO;
 import com.lmsbackend.entity.Bookrent;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 public interface BookerentDAO {
     public void save(Bookrent book,int memberId,int bookId);
 
-    public List<Bookrent> getBookrent();
+    public List<ShowDataDTO> getBookrent();
 
     public Bookrent getBookrent(int id);
 

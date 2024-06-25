@@ -37,12 +37,12 @@ public class Bookrent {
     private Member member;
 
     @JsonManagedReference
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "librarian_id")
     Librarian librarian;
 
     @JsonManagedReference
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "book_id")
     Book book;
 }
