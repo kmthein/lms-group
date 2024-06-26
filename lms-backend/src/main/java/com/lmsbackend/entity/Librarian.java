@@ -1,5 +1,6 @@
 package com.lmsbackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,9 +23,9 @@ public class Librarian {
     @Column(name = "employment_date")
     private LocalDate employmentDate;
 
-    @JsonManagedReference
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 
     public Librarian(LocalDate employmentDate, User user) {

@@ -1,5 +1,6 @@
 package com.lmsbackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,9 +27,9 @@ public class Member {
     @Column(name = "end_date")
     private LocalDate endDate;
 
-    @JsonManagedReference
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 
     public Member(String memberType, LocalDate startDate, LocalDate endDate, User user) {

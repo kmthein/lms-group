@@ -19,7 +19,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/author")
-@CrossOrigin(origins = "http://localhost:5173/")
+@CrossOrigin
 public class AuthorController {
     @Autowired
     private AuthorDAO authorDAO;
