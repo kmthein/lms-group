@@ -42,10 +42,7 @@ public class UserController {
             return res;
         } else if (res.getMessage().equals("Wrong email or password, try again")) {
             return res;
-        } else if (res.getUser() != null) {
-            res.setToken("e824krl0131kl3l1knj");
         }
-
         return res;
     }
 

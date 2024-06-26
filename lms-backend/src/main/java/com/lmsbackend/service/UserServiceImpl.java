@@ -3,6 +3,7 @@ package com.lmsbackend.service;
 import com.lmsbackend.dao.LibrarianDAO;
 import com.lmsbackend.dao.MemberDAO;
 import com.lmsbackend.dao.UserDAO;
+import com.lmsbackend.dto.MemberDTO;
 import com.lmsbackend.dto.ResponseDTO;
 import com.lmsbackend.entity.Librarian;
 import com.lmsbackend.entity.Member;
@@ -65,7 +66,7 @@ public class UserServiceImpl implements UserService {
                             String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
                             Files.createDirectories(Paths.get(UPLOAD_DIR));
                             file.transferTo(new File(UPLOAD_DIR + "/" + fileName));
-                            user.setUserImg("/external-images/user" + fileName);
+                            user.setUserImg("/external-images/user/" + fileName);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -94,11 +95,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userDAO.findAll();
-    }
-
-    @Override
     public ResponseDTO loginUser(String email, String password) {
         User user = userDAO.findUserByEmail(email);
         String encryptedPassword = hashPassword(password);
@@ -106,17 +102,36 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             responseDTO.setMessage("Email not found");
             responseDTO.setUser(user);
+            responseDTO.setStatus("403");
             return responseDTO;
         } else {
-            System.out.println(encryptedPassword);
-            System.out.println(hashPassword("123"));
             if (!encryptedPassword.equals(user.getPassword())) {
                 responseDTO.setMessage("Wrong email or password, try again");
+                responseDTO.setStatus("401");
                 return responseDTO;
             };
         }
+        responseDTO.setToken(hashPassword(user.getEmail()));
         responseDTO.setMessage("Login Successful");
-        responseDTO.setUser(user);
+        responseDTO.setStatus("200");
+        MemberDTO memberDTO = new MemberDTO();
+        memberDTO.setId(user.getId());
+        memberDTO.setEmail(user.getEmail());
+        memberDTO.setUsername(user.getUsername());
+        memberDTO.setName(user.getName());
+        memberDTO.setPhone(user.getPhone());
+        memberDTO.setAddress(user.getAddress());
+        memberDTO.setUserImg(user.getUserImg());
+        memberDTO.setMemberType(user.getMember().getMemberType());
+        memberDTO.setMemberStartDate(user.getMember().getStartDate());
+        memberDTO.setMemberExpireDate(user.getMember().getEndDate());
+        responseDTO.setMemberDTO(memberDTO);
         return responseDTO;
     }
+
+    @Override
+    public List<User> getAllUsers() {
+        return userDAO.findAll();
+    }
+
 }

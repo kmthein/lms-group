@@ -1,50 +1,23 @@
 package com.lmsbackend.dto;
 
 import com.lmsbackend.entity.User;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
 public class ResponseDTO {
     private String message;
+    private MemberDTO memberDTO;
     private User user;
     private String token;
+    private String status;
 
-    public ResponseDTO() {
-    }
-    public ResponseDTO(String message) {
+    public ResponseDTO(String message, MemberDTO memberDTO, String token, String status) {
         this.message = message;
-    }
-
-    public ResponseDTO(String message, User user) {
-        this.message = message;
-        this.user = user;
-    }
-
-    public ResponseDTO(String message, User user, String token) {
-        this.message = message;
-        this.user = user;
+        this.memberDTO = memberDTO;
         this.token = token;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
+        this.status = status;
     }
 }
