@@ -1,5 +1,6 @@
 package com.lmsbackend.dao;
 
+import com.lmsbackend.dto.ShowDataDTO;
 import com.lmsbackend.entity.Book;
 import com.lmsbackend.entity.Bookrent;
 import com.lmsbackend.entity.Member;
@@ -42,9 +43,13 @@ public class BookrentDAOImpl implements BookerentDAO {
     }
 
     @Override
-    public List<Bookrent> getBookrent() {
-        TypedQuery<Bookrent> query = em.createQuery("select b from Bookrent b", Bookrent.class);
+    public List<ShowDataDTO> getBookrent() {
+        String jpql = "select new com.lmsbackend.dto.ShowDataDTO(b.rentId, b.rentDate, b.dueDate, b.status, b.returnDate,b.book) from Bookrent b";
+        TypedQuery<ShowDataDTO> query = em.createQuery(jpql, ShowDataDTO.class);
+        System.out.println(query.getResultList());
         return query.getResultList();
+        //TypedQuery<ShowDataDTO> query = em.createQuery("select b.rentId, b.rentDate, b.dueDate, b.status, b.returnDate from Bookrent b", ShowDataDTO.class);
+        //return query.getResultList();
     }
 
     @Override

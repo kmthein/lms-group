@@ -2,6 +2,7 @@ package com.lmsbackend.controller;
 
 import com.lmsbackend.dao.BookerentDAO;
 import com.lmsbackend.dto.RentDTO;
+import com.lmsbackend.dto.ShowDataDTO;
 import com.lmsbackend.entity.Bookrent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
+@CrossOrigin()
 @RestController
 @RequestMapping("api/rent")
 public class BookrentController {
@@ -20,7 +22,7 @@ public class BookrentController {
     }
 
     @GetMapping("all")
-    public List<Bookrent> getBookrent() {
+    public List<ShowDataDTO> getBookrent() {
         return bookerentDAO.getBookrent();
     }
     @GetMapping("{id}")

@@ -18,7 +18,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/book")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:5173/")
 public class BookController {
     private BookDAO bookDAO;
 
