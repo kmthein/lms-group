@@ -34,12 +34,11 @@ public class User {
     @Column(name = "user_img")
     private String userImg;
 
-    @OneToOne(mappedBy = "user", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE})
+    @OneToOne(mappedBy = "user", cascade = {CascadeType.ALL})
     @JsonManagedReference
     private Member member;
 
-    @OneToOne(mappedBy = "user", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE})
+    @OneToOne(mappedBy = "user", cascade = {CascadeType.ALL})
     @JsonManagedReference
     private Librarian librarian;
-
 }
