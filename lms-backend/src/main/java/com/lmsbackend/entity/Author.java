@@ -24,10 +24,6 @@ public class Author {
     @Column(name = "author_img")
     private String authorImg;
 
-//    @JsonBackReference
-//    @OneToMany(mappedBy = "author")
-//    private List<Book> books = new ArrayList<>();
-
     public Author(String name, String authorImg) {
         this.name = name;
         this.authorImg = authorImg;

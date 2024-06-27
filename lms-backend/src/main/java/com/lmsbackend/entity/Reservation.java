@@ -24,13 +24,13 @@ public class Reservation {
     @Column(name = "status")
     private String status;
 
-   @JsonManagedReference
-    @ManyToOne
+    @JsonManagedReference
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "book_id")
     Book book;
 
     @JsonManagedReference
     @ManyToOne
-    @JoinColumn(name="member_id")
-    Member member;
+    @JoinColumn(name = "member_id")
+    User member;
 }

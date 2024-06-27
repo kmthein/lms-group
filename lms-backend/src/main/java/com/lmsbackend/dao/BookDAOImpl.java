@@ -1,5 +1,6 @@
 package com.lmsbackend.dao;
 
+import com.lmsbackend.dto.DashboardCountDTO;
 import com.lmsbackend.entity.Author;
 import com.lmsbackend.entity.Book;
 import com.lmsbackend.entity.Genre;
@@ -21,6 +22,17 @@ public class BookDAOImpl implements BookDAO {
     @Autowired
     public BookDAOImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
+    }
+
+    @Override
+    public DashboardCountDTO getAllCount() {
+        TypedQuery<DashboardCountDTO> jpql = entityManager.createQuery("SELECT new com.lmsbackend.dto.DashboardCountDTO(" +
+                " (SELECT COUNT(b) FROM Book b), " +
+                " (SELECT COUNT(g) FROM Genre g), " +
+                " (SELECT COUNT(a) FROM Author a), " +
+                " (SELECT COUNT(br) FROM Bookrent br))", DashboardCountDTO.class);
+        System.out.println(jpql.getSingleResult());
+        return jpql.getSingleResult();
     }
 
     @Override

@@ -6,24 +6,14 @@ import com.lmsbackend.entity.Member;
 import java.time.LocalDate;
 
 public class RentDTO {
-    private LocalDate dueDate;
     private int memberId;
     private int bookId;
 
     public RentDTO(){}
 
-    public RentDTO(LocalDate dueDate, int memberId, int bookId) {
-        this.dueDate = dueDate;
+    public RentDTO(int memberId, int bookId) {
         this.memberId = memberId;
         this.bookId = bookId;
-    }
-
-    public LocalDate getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(LocalDate dueDate) {
-        this.dueDate = dueDate;
     }
 
     public int getMemberId() {

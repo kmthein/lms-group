@@ -34,6 +34,12 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public User findUserById(int id) {
+        User user = em.find(User.class, id);
+        return user;
+    }
+
+    @Override
     public User findUserByEmail(String email) {
         Query q = em.createQuery("FROM User u WHERE u.email = :email", User.class);
         q.setParameter("email", email);

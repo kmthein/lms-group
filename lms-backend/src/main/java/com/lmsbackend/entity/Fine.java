@@ -25,7 +25,7 @@ public class Fine {
     private int amount;
 
     @Column(name = "fine_date")
-    private LocalDate fineDate;
+    private int fineDate;
 
     @Column(name = "payment_status")
     private String paymentStatus;
@@ -38,7 +38,5 @@ public class Fine {
     @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "member_id")
-    Member member;
-
-
+    User member;
 }

@@ -5,7 +5,7 @@ import com.lmsbackend.entity.Reservation;
 import java.util.List;
 
 public interface ReservationDAO {
-    void saveReservation(Reservation reservation);
+    Reservation saveReservation(Reservation reservation);
     Reservation getReservationById(int id);
     Reservation getReservation(int id);
     List<Reservation> findall();

@@ -3,7 +3,7 @@ package com.lmsbackend.dao;
 import com.lmsbackend.dto.ShowDataDTO;
 import com.lmsbackend.entity.Book;
 import com.lmsbackend.entity.Bookrent;
-import com.lmsbackend.entity.Member;
+import com.lmsbackend.entity.User;
 import com.lmsbackend.exception.ResourceNotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public class BookrentDAOImpl implements BookerentDAO {
+public class BookrentDAOImpl implements BookrentDAO {
     private EntityManager em;
 
     @Autowired
@@ -25,7 +25,7 @@ public class BookrentDAOImpl implements BookerentDAO {
     @Override
     @Transactional
     public void save(Bookrent book,int memberId,int bookId) {
-        Member m = em.find(Member.class, memberId);
+        User m = em.find(User.class, memberId);
         if (m == null) {
             throw new ResourceNotFoundException("Member id "+ memberId +" is not existed.");
         }

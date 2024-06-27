@@ -2,7 +2,9 @@ package com.lmsbackend.controller;
 
 import com.lmsbackend.dao.BookDAO;
 import com.lmsbackend.dto.BookDTO;
+import com.lmsbackend.dto.DashboardCountDTO;
 import com.lmsbackend.entity.Book;
+import com.lmsbackend.service.DashboardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,9 @@ import java.util.UUID;
 @CrossOrigin(origins = "http://localhost:5173/")
 public class BookController {
     private BookDAO bookDAO;
+
+    @Autowired
+    private DashboardService dashboardService;
 
     @Autowired
     public BookController(BookDAO bookDAO) {
@@ -109,5 +114,10 @@ public class BookController {
     public String deleteBook(@PathVariable int id) {
         bookDAO.deleteBook(id);
         return "Deleted Successfully ! "+id;
+    }
+
+    @GetMapping("/all-count")
+    public DashboardCountDTO getAllCounts() {
+        return dashboardService.getAllCounts();
     }
 }

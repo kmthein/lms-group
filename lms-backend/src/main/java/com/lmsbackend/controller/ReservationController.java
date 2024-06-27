@@ -1,8 +1,11 @@
 package com.lmsbackend.controller;
 
 import com.lmsbackend.dao.ReservationDAO;
+import com.lmsbackend.dto.RentDTO;
+import com.lmsbackend.dto.ResponseDTO;
 import com.lmsbackend.entity.Author;
 import com.lmsbackend.entity.Reservation;
+import com.lmsbackend.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +14,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/reservation")
+@CrossOrigin
 public class ReservationController {
     @Autowired
     private ReservationDAO reservationDAO;
+
+    @Autowired
+    private ReservationService reservationService;
 
     @GetMapping("all")
     public List<Reservation> getReservation() {
@@ -25,9 +32,9 @@ public class ReservationController {
         return reservationDAO.getReservationById(id);
     }
     @PostMapping("create")
-    private ResponseEntity<String> addReservation(@RequestBody Reservation reservation){
-        reservationDAO.saveReservation(reservation);
-        return ResponseEntity.ok("Added successful");
+    private ResponseDTO addReservation(@ModelAttribute RentDTO reservation){
+        ResponseDTO res = reservationService.makeReservation(reservation.getMemberId(), reservation.getBookId());
+        return res;
     }
     @PostMapping("update/{id}")
     public ResponseEntity<String> updateReservation(@PathVariable int id, @RequestBody Reservation reservation){

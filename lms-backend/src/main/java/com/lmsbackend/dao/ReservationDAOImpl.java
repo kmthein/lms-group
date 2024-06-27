@@ -15,8 +15,9 @@ public class ReservationDAOImpl implements ReservationDAO{
 
     @Override
     @Transactional
-    public void saveReservation(Reservation reservation) {
+    public Reservation saveReservation(Reservation reservation) {
         em.persist(reservation);
+        return reservation;
     }
 
     @Override

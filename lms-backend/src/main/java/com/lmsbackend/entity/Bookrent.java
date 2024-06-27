@@ -34,15 +34,15 @@ public class Bookrent {
     @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "member_id")
-    private Member member;
+    private User member;
 
     @JsonManagedReference
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "librarian_id")
-    Librarian librarian;
+    private User librarian;
 
     @JsonManagedReference
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "book_id")
-    Book book;
+    private Book book;
 }

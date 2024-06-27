@@ -1,6 +1,6 @@
 package com.lmsbackend.controller;
 
-import com.lmsbackend.dao.BookerentDAO;
+import com.lmsbackend.dao.BookrentDAO;
 import com.lmsbackend.dto.RentDTO;
 import com.lmsbackend.dto.ShowDataDTO;
 import com.lmsbackend.entity.Bookrent;
@@ -8,16 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @CrossOrigin()
 @RestController
 @RequestMapping("api/rent")
 public class BookrentController {
-    private BookerentDAO bookerentDAO;
+    private BookrentDAO bookerentDAO;
     @Autowired
-    public BookrentController(BookerentDAO bookerentDAO) {
+    public BookrentController(BookrentDAO bookerentDAO) {
         this.bookerentDAO = bookerentDAO;
     }
 
@@ -30,12 +29,12 @@ public class BookrentController {
         return bookerentDAO.getBookrent(id);
     }
     @PostMapping("create")
-    public ResponseEntity<String> addBookrent(@RequestBody RentDTO rent) {
-        Bookrent bookrent = new Bookrent();
-        bookrent.setRentDate(LocalDate.now());
-        bookrent.setDueDate(rent.getDueDate());
-        bookrent.setStatus("pending");
-        bookerentDAO.save(bookrent,rent.getMemberId(),rent.getBookId());
+    public ResponseEntity<String> addBookrent(@ModelAttribute RentDTO rent) {
+        System.out.println(rent);
+//        Bookrent bookrent = new Bookrent();
+//        bookrent.setRentDate(LocalDate.now());
+//        bookrent.setStatus("pending");
+//        bookerentDAO.save(bookrent,rent.getMemberId(),rent.getBookId());
         return ResponseEntity.ok("Bookrent added successfully");
     }
 

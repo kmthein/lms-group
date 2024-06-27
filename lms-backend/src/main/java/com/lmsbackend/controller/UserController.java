@@ -35,8 +35,6 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseDTO loginUser(@RequestParam("email") String email, @RequestParam("password") String password) {
-        System.out.println("Email: " + email);
-        System.out.println("Password: " + password);
         ResponseDTO res = userService.loginUser(email, password);
         if (res.getUser() == null) {
             return res;
