@@ -32,7 +32,7 @@ public class Bookrent {
     private LocalDate returnDate;
 
     @JsonManagedReference
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "member_id")
     private User member;
 

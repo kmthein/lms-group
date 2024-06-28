@@ -2,8 +2,10 @@ package com.lmsbackend.controller;
 
 import com.lmsbackend.dao.BookrentDAO;
 import com.lmsbackend.dto.RentDTO;
+import com.lmsbackend.dto.ResponseDTO;
 import com.lmsbackend.dto.ShowDataDTO;
 import com.lmsbackend.entity.Bookrent;
+import com.lmsbackend.service.BookrentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,40 +16,21 @@ import java.util.List;
 @RestController
 @RequestMapping("api/rent")
 public class BookrentController {
-    private BookrentDAO bookerentDAO;
+
     @Autowired
-    public BookrentController(BookrentDAO bookerentDAO) {
-        this.bookerentDAO = bookerentDAO;
-    }
+    private BookrentService bookrentService;
 
     @GetMapping("all")
-    public List<ShowDataDTO> getBookrent() {
-        return bookerentDAO.getBookrent();
+    public List<Bookrent> getBookrent() {
+        return bookrentService.getAllBookrents();
     }
     @GetMapping("{id}")
     public Bookrent getBookrentById(@PathVariable int id) {
-        return bookerentDAO.getBookrent(id);
+        return null;
     }
     @PostMapping("create")
-    public ResponseEntity<String> addBookrent(@ModelAttribute RentDTO rent) {
-        System.out.println(rent);
-//        Bookrent bookrent = new Bookrent();
-//        bookrent.setRentDate(LocalDate.now());
-//        bookrent.setStatus("pending");
-//        bookerentDAO.save(bookrent,rent.getMemberId(),rent.getBookId());
-        return ResponseEntity.ok("Bookrent added successfully");
+    public ResponseDTO addBookrent(@ModelAttribute RentDTO rent) {
+        ResponseDTO responseDTO = bookrentService.makeBookrent(rent.getMemberId(), rent.getBookId());
+        return responseDTO;
     }
-
-    @PostMapping("update/{id}")
-    public ResponseEntity<String> updateBookrent(@PathVariable int id, @RequestBody Bookrent bookrent) {
-        bookerentDAO.updateBookrent(bookrent);
-        return ResponseEntity.ok("Bookrent updated successfully");
-    }
-
-    @GetMapping("delete/{id}")
-    public ResponseEntity<String> deleteBookrent(@PathVariable int id) {
-        bookerentDAO.deleteBookrent(id);
-        return ResponseEntity.ok("Bookrent deleted successfully");
-    }
-
 }

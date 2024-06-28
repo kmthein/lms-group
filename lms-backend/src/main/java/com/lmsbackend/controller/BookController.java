@@ -115,9 +115,4 @@ public class BookController {
         bookDAO.deleteBook(id);
         return "Deleted Successfully ! "+id;
     }
-
-    @GetMapping("/all-count")
-    public DashboardCountDTO getAllCounts() {
-        return dashboardService.getAllCounts();
-    }
 }

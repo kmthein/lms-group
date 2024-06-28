@@ -2,6 +2,7 @@ package com.lmsbackend.dto;
 
 import com.lmsbackend.entity.Book;
 import com.lmsbackend.entity.Librarian;
+import com.lmsbackend.entity.User;
 
 
 import java.time.LocalDate;
@@ -14,9 +15,31 @@ public class ShowDataDTO {
     private LocalDate returnDate;
     private Book book;
 
+    private User member;
+    private User libraraian;
+
     public ShowDataDTO() {}
 
+    public ShowDataDTO(int rentId, LocalDate rentDate, LocalDate dueDate, String status, LocalDate returnDate, Book book, User member, User libraraian) {
+        this.rentId = rentId;
+        this.rentDate = rentDate;
+        this.dueDate = dueDate;
+        this.status = status;
+        this.returnDate = returnDate;
+        this.book = book;
+        this.member = member;
+        this.libraraian = libraraian;
+    }
 
+    public ShowDataDTO(int rentId, LocalDate rentDate, LocalDate dueDate, String status, LocalDate returnDate, Book book, User member) {
+        this.rentId = rentId;
+        this.rentDate = rentDate;
+        this.dueDate = dueDate;
+        this.status = status;
+        this.returnDate = returnDate;
+        this.book = book;
+        this.member = member;
+    }
 
     public ShowDataDTO(int rentId, LocalDate rentDate, LocalDate dueDate, String status, LocalDate returnDate, Book book) {
         this.rentId = rentId;
