@@ -38,6 +38,7 @@ public class BookrentDAOImpl implements BookrentDAO {
     }
 
     @Override
+    @Transactional
     public void updateBookrent(Bookrent book) {
         em.merge(book);
     }

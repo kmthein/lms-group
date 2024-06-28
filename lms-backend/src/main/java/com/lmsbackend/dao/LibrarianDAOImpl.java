@@ -1,6 +1,7 @@
 package com.lmsbackend.dao;
 
 import com.lmsbackend.entity.Librarian;
+import com.lmsbackend.entity.User;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,5 +15,11 @@ public class LibrarianDAOImpl implements LibrarianDAO {
     @Override
     public void save(Librarian librarian) {
         em.persist(librarian);
+    }
+
+    @Override
+    public User getById(int id) {
+        User librarian = em.find(User.class, id);
+        return librarian;
     }
 }

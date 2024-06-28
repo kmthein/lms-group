@@ -33,4 +33,12 @@ public class BookrentController {
         ResponseDTO responseDTO = bookrentService.makeBookrent(rent.getMemberId(), rent.getBookId());
         return responseDTO;
     }
+    @PutMapping("/update")
+    public ResponseDTO updateBookrent(@ModelAttribute RentDTO rentDTO) {
+        System.out.println(rentDTO.getRentId());
+        System.out.println(rentDTO.getReturnDate());
+        bookrentService.updateBookrent(rentDTO);
+        return null;
+    }
+
 }
