@@ -1,7 +1,9 @@
 package com.lmsbackend.dao;
 
+import com.lmsbackend.dto.FineDTO;
 import com.lmsbackend.entity.Fine;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface FineDAO {
@@ -14,6 +16,4 @@ public interface FineDAO {
     void updateFine(Fine fine);
 
     void deleteFine(int id);
-
-
 }

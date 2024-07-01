@@ -22,7 +22,7 @@ public class Fine {
     private int fineId;
 
     @Column(name = "amount")
-    private int amount;
+    private double amount;
 
     @Column(name = "fine_date")
     private LocalDate fineDate;
@@ -39,6 +39,5 @@ public class Fine {
     @ManyToOne
     @JoinColumn(name = "member_id")
     Member member;
-
 
 }

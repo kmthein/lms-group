@@ -1,5 +1,6 @@
 package com.lmsbackend.dao;
 
+import com.lmsbackend.dto.FineDTO;
 import com.lmsbackend.entity.Fine;
 import com.lmsbackend.entity.Genre;
 import jakarta.persistence.EntityManager;
@@ -7,7 +8,10 @@ import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.PathVariable;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Repository
@@ -20,6 +24,8 @@ public class FineDAOImpl implements FineDAO {
     @Transactional
     public void saveFine(Fine fine) {
         em.persist(fine);
+
+
     }
 
     @Override
@@ -45,5 +51,6 @@ public class FineDAOImpl implements FineDAO {
         Fine theFine = em.find(Fine.class, id);
         em.remove(theFine);
     }
+
 
 }
