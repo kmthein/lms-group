@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 
@@ -32,5 +31,5 @@ public class Reservation {
     @JsonManagedReference
     @ManyToOne
     @JoinColumn(name="member_id")
-    Member member;
+    User member;
 }

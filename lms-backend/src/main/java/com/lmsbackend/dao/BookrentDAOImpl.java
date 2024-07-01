@@ -25,20 +25,6 @@ public class BookrentDAOImpl implements BookerentDAO {
     @Override
     @Transactional
     public void save(Bookrent book,int memberId,int bookId) {
-        Member m = em.find(Member.class, memberId);
-        if (m == null) {
-            throw new ResourceNotFoundException("Member id "+ memberId +" is not existed.");
-        }
-        if(m != null){
-            book.setMember(m);
-        }
-        Book b = em.find(Book.class, bookId);
-        if (b == null) {
-            throw new ResourceNotFoundException("Book id "+ bookId +" is not existed.");
-        }
-        if(b != null){
-            book.setBook(b);
-        }
         em.persist(book);
     }
 

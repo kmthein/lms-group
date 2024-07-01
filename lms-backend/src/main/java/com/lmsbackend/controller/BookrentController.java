@@ -1,7 +1,6 @@
 package com.lmsbackend.controller;
 
 import com.lmsbackend.dao.BookerentDAO;
-import com.lmsbackend.dto.RentDTO;
 import com.lmsbackend.dto.ShowDataDTO;
 import com.lmsbackend.entity.Bookrent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,15 +28,15 @@ public class BookrentController {
     public Bookrent getBookrentById(@PathVariable int id) {
         return bookerentDAO.getBookrent(id);
     }
-    @PostMapping("create")
-    public ResponseEntity<String> addBookrent(@RequestBody RentDTO rent) {
-        Bookrent bookrent = new Bookrent();
-        bookrent.setRentDate(LocalDate.now());
-        bookrent.setDueDate(rent.getDueDate());
-        bookrent.setStatus("pending");
-        bookerentDAO.save(bookrent,rent.getMemberId(),rent.getBookId());
-        return ResponseEntity.ok("Bookrent added successfully");
-    }
+//    @PostMapping("create")
+//    public ResponseEntity<String> addBookrent(@RequestBody RentDTO rent) {
+//        Bookrent bookrent = new Bookrent();
+//        bookrent.setRentDate(LocalDate.now());
+//        bookrent.setDueDate(rent.getDueDate());
+//        bookrent.setStatus("pending");
+//        bookerentDAO.save(bookrent,rent.getMemberId(),rent.getBookId());
+//        return ResponseEntity.ok("Bookrent added successfully");
+//    }
 
     @PostMapping("update/{id}")
     public ResponseEntity<String> updateBookrent(@PathVariable int id, @RequestBody Bookrent bookrent) {

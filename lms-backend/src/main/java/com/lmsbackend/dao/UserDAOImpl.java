@@ -45,4 +45,9 @@ public class UserDAOImpl implements UserDAO {
             return null;
         }
     }
+
+    @Override
+    public User findUserById(int id) {
+        return em.find(User.class, id);
+    }
 }
