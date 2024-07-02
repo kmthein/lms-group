@@ -3,6 +3,7 @@ package com.lmsbackend.service;
 import com.lmsbackend.dao.LibrarianDAO;
 import com.lmsbackend.dao.MemberDAO;
 import com.lmsbackend.dao.UserDAO;
+import com.lmsbackend.dto.LibrarianDTO;
 import com.lmsbackend.dto.MemberDTO;
 import com.lmsbackend.dto.ResponseDTO;
 import com.lmsbackend.entity.Librarian;
@@ -114,19 +115,33 @@ public class UserServiceImpl implements UserService {
         responseDTO.setToken(hashPassword(user.getEmail()));
         responseDTO.setMessage("Login Successful");
         responseDTO.setStatus("200");
-        MemberDTO memberDTO = new MemberDTO();
-        memberDTO.setId(user.getId());
-        memberDTO.setEmail(user.getEmail());
-        memberDTO.setUsername(user.getUsername());
-        memberDTO.setName(user.getName());
-        memberDTO.setPhone(user.getPhone());
-        memberDTO.setAddress(user.getAddress());
-        memberDTO.setUserImg(user.getUserImg());
-        memberDTO.setMemberType(user.getMember().getMemberType());
-        memberDTO.setMemberStartDate(user.getMember().getStartDate());
-        memberDTO.setMemberExpireDate(user.getMember().getEndDate());
-        responseDTO.setMemberDTO(memberDTO);
-        return responseDTO;
+        if (user.getRole().equals(Role.MEMBER)) {
+            MemberDTO memberDTO = new MemberDTO();
+            memberDTO.setId(user.getId());
+            memberDTO.setEmail(user.getEmail());
+            memberDTO.setUsername(user.getUsername());
+            memberDTO.setName(user.getName());
+            memberDTO.setPhone(user.getPhone());
+            memberDTO.setAddress(user.getAddress());
+            memberDTO.setUserImg(user.getUserImg());
+            memberDTO.setMemberType(user.getMember().getMemberType());
+            memberDTO.setMemberStartDate(user.getMember().getStartDate());
+            memberDTO.setMemberExpireDate(user.getMember().getEndDate());
+            memberDTO.setRole(String.valueOf(user.getRole()));
+            responseDTO.setMemberDTO(memberDTO);
+        } else if (user.getRole().equals(Role.LIBRARIAN)) {
+            LibrarianDTO librarianDTO = new LibrarianDTO();
+            librarianDTO.setId(user.getId());
+            librarianDTO.setEmail(user.getEmail());
+            librarianDTO.setUsername(user.getUsername());
+            librarianDTO.setName(user.getName());
+            librarianDTO.setPhone(user.getPhone());
+            librarianDTO.setUserImg(user.getUserImg());
+            librarianDTO.setRole(String.valueOf(user.getRole()));
+            librarianDTO.setEmploymentDate(user.getLibrarian().getEmploymentDate());
+            responseDTO.setLibrarianDTO(librarianDTO);
+        }
+            return responseDTO;
     }
 
     @Override

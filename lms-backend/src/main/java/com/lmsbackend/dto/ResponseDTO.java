@@ -12,13 +12,15 @@ import lombok.NoArgsConstructor;
 public class ResponseDTO {
     private String message;
     private MemberDTO memberDTO;
+    private LibrarianDTO librarianDTO;
     private User user;
     private String token;
     private String status;
 
-    public ResponseDTO(String message, MemberDTO memberDTO, String token, String status) {
+    public ResponseDTO(String message, MemberDTO memberDTO, LibrarianDTO librarianDTO, String token, String status) {
         this.message = message;
         this.memberDTO = memberDTO;
+        this.librarianDTO = librarianDTO;
         this.token = token;
         this.status = status;
     }
