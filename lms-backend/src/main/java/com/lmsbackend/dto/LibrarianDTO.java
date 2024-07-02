@@ -3,13 +3,14 @@ package com.lmsbackend.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MemberDTO {
+public class LibrarianDTO {
     private int id;
     private String email;
     private String username;
@@ -18,7 +19,5 @@ public class MemberDTO {
     private String address;
     private String userImg;
     private String role;
-    private String memberType;
-    private LocalDate memberStartDate;
-    private LocalDate memberExpireDate;
+    private LocalDate employmentDate;
 }
