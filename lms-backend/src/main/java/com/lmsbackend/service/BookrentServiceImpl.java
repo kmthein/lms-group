@@ -6,9 +6,9 @@ import com.lmsbackend.dao.LibrarianDAO;
 import com.lmsbackend.dao.UserDAO;
 import com.lmsbackend.dto.RentDTO;
 import com.lmsbackend.dto.ResponseDTO;
+import com.lmsbackend.dto.ShowBookRentDTO;
 import com.lmsbackend.entity.Book;
 import com.lmsbackend.entity.Bookrent;
-import com.lmsbackend.entity.Librarian;
 import com.lmsbackend.entity.User;
 import com.lmsbackend.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -33,6 +34,29 @@ public class BookrentServiceImpl implements BookrentService {
     public List<Bookrent> getAllBookrents() {
         return bookrentDAO.getAllBookRent();
     }
+
+    @Override
+    public List<ShowBookRentDTO> getBookRents(int id) {
+        List<Bookrent> bookrents = bookrentDAO.getBookRentUserById(id);
+        List<ShowBookRentDTO> userbookrent = new ArrayList<>();
+
+        for(Bookrent br : bookrents){
+            ShowBookRentDTO showBookRentDTO = new ShowBookRentDTO();
+
+            showBookRentDTO.setRentId(br.getRentId());
+            showBookRentDTO.setImgName(br.getBook().getBookImg());
+            showBookRentDTO.setBookTitle(br.getBook().getTitle());
+            showBookRentDTO.setGenres(br.getBook().getGenres());
+            showBookRentDTO.setRentDate(br.getRentDate());
+            showBookRentDTO.setDueDate(br.getDueDate());
+            showBookRentDTO.setPublishYear(br.getBook().getPublishYear());
+            showBookRentDTO.setAuthorName(br.getBook().getAuthor().getName());
+            userbookrent.add(showBookRentDTO);
+        }
+        return  userbookrent;
+
+    }
+
 
     @Override
     public ResponseDTO makeBookrent(int memberId, int bookId) {

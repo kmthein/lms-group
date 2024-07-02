@@ -2,6 +2,7 @@ package com.lmsbackend.service;
 
 import com.lmsbackend.dto.RentDTO;
 import com.lmsbackend.dto.ResponseDTO;
+import com.lmsbackend.dto.ShowBookRentDTO;
 import com.lmsbackend.entity.Bookrent;
 
 import java.util.List;
@@ -12,4 +13,5 @@ public interface BookrentService {
     ResponseDTO updateBookrent(RentDTO rentDTO);
 
     List<Bookrent> getAllBookrents();
+    List<ShowBookRentDTO> getBookRents(int id);
 }

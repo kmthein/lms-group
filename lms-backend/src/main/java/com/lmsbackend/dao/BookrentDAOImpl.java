@@ -1,6 +1,6 @@
 package com.lmsbackend.dao;
 
-import com.lmsbackend.dto.ShowDataDTO;
+import com.lmsbackend.dto.ShowBookRentDTO;
 import com.lmsbackend.entity.Bookrent;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -28,7 +28,14 @@ public class BookrentDAOImpl implements BookrentDAO {
 
     @Override
     public List<Bookrent> getAllBookRent() {
-        TypedQuery<Bookrent> query = em.createQuery("FROM Bookrent br", Bookrent.class);
+        TypedQuery<Bookrent> query = em.createQuery("from Bookrent ",Bookrent.class);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Bookrent> getBookRentUserById(int id) {
+        TypedQuery<Bookrent> query = em.createQuery("from Bookrent br where br.member.id=:id",Bookrent.class);
+        query.setParameter("id",id);
         return query.getResultList();
     }
 
