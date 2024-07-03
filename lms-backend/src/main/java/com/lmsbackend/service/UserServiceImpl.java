@@ -94,7 +94,6 @@ public class UserServiceImpl implements UserService {
             return "User created successfully";
         }
     }
-
     @Override
     public ResponseDTO loginUser(String email, String password) {
         User user = userDAO.findUserByEmail(email);

@@ -14,6 +14,14 @@ public class BookReviewDAOImpl implements BookReviewDAO {
 
     private EntityManager entityManager;
 
+    @Override
+    public List<BookReview> getAllReviewByBookId(int bookId) {
+        TypedQuery<BookReview> query = entityManager.createQuery("SELECT br FROM BookReview br WHERE br.book.id = :bookId", BookReview.class);
+        query.setParameter("bookId", bookId);
+        List<BookReview> bookReviewList = query.getResultList();
+        return bookReviewList;
+    }
+
     @Autowired
     public BookReviewDAOImpl(EntityManager entityManager) {
         this.entityManager = entityManager;

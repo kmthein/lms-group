@@ -1,6 +1,7 @@
 package com.lmsbackend.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.lmsbackend.entity.BookReview;
 import com.lmsbackend.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,6 +14,7 @@ public class ResponseDTO {
     private String message;
     private MemberDTO memberDTO;
     private LibrarianDTO librarianDTO;
+    private BookReview bookReview;
     private User user;
     private String token;
     private String status;

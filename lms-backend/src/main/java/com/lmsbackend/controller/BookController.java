@@ -4,6 +4,8 @@ import com.lmsbackend.dao.BookDAO;
 import com.lmsbackend.dto.BookDTO;
 import com.lmsbackend.dto.DashboardCountDTO;
 import com.lmsbackend.entity.Book;
+import com.lmsbackend.entity.BookReview;
+import com.lmsbackend.service.BookReviewService;
 import com.lmsbackend.service.DashboardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,12 +22,15 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/book")
-@CrossOrigin(origins = "http://localhost:5173/")
+@CrossOrigin
 public class BookController {
     private BookDAO bookDAO;
 
     @Autowired
     private DashboardService dashboardService;
+
+    @Autowired
+    private BookReviewService bookReviewService;
 
     @Autowired
     public BookController(BookDAO bookDAO) {
@@ -102,13 +107,16 @@ public class BookController {
         } else {
             book.setBookImg(bookDTO.getBookImg());
         }
-        System.out.println(id);
-        System.out.println(bookDTO.getBookImg());
-        System.out.println(bookDTO.getTitle());
         bookDAO.updateBook(book, bookDTO.getAuthorId(), bookDTO.getPublisherId(), bookDTO.getGenreIds());
         return ResponseEntity.ok("Updated Successfully! ");
     }
 
+    @CrossOrigin
+    @GetMapping("/{id}/review")
+    public ResponseEntity<?> getReviewByBook(@PathVariable int id) {
+        List<BookReview> bookReviewList = bookReviewService.getAllReviewsByBook(id);
+        return ResponseEntity.ok(bookReviewList);
+    }
     @GetMapping("/delete/{id}")
     @Transactional
     public String deleteBook(@PathVariable int id) {

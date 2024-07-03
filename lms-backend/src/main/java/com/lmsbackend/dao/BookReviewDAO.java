@@ -5,6 +5,7 @@ import com.lmsbackend.entity.BookReview;
 import java.util.List;
 
 public interface BookReviewDAO {
+    List<BookReview> getAllReviewByBookId(int bookId);
 
     //save data
     void saveBookReview(BookReview bookReview);
